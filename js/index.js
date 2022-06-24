@@ -7,10 +7,13 @@ const mainMenuButton = document.getElementById('main-menu-button')
 const popComposer = document.getElementById('pop-composer')
 const music = new Audio("project-1/music/Gymnopedie-1.mp3")
 const cardContainer = document.getElementById("card-container")
-const gameScore = document.createElement('h2')
+//const gameScore = document.createElement('h2')
+const gameScore = document.getElementById('game-score')
+
 // gameScore.setAttribute("id", "game-score")
-const turnMessage = document.createElement('h2')
+//const turnMessage = document.createElement('h2')
 // turnMessage.setAttribute("id", "turn-message")
+const turnMessage = document.getElementById('turn-message')
 
 let score = 0
 let cardValue = null
@@ -19,18 +22,18 @@ let cardClass = null
 let turn = 0
 
 // Composer's inside composerArray
-const vivaldi = "project-1/images/composers/Antonio-Vivaldi.png"
-const bach = "project-1/images/composers/Johann-Sebastian-Bach.png"
-const mendelssohn = "project-1/images/composers/Felix-Mendelssohn.png"
-const chopin = "project-1/images/composers/Frederic-Chopin.png"
-const handel = "project-1/images/composers/George-Frideric-Handel.png"
-const rossini = "project-1/images/composers/Gioachino-Rossini.png"
-const verdi = "project-1/images/composers/Giuseppe-Verdi.png"
-const brahms = "project-1/images/composers/Johannes-Brahms.png"
-const beethoven = "project-1/images/composers/Ludwig-van-Beethoven.png"
-const wagner = "project-1/images/composers/Richard-Wagner.png"
-const mozart = "project-1/images/composers/Wolfgang-Amadeus-Mozart.png"
-const rachmaninov = "project-1/images/composers/Sergei-Rachmaninov.png"
+const vivaldi = "/images/composers/Antonio-Vivaldi.png"
+const bach = "/images/composers/Johann-Sebastian-Bach.png"
+const mendelssohn = "/images/composers/Felix-Mendelssohn.png"
+const chopin = "/images/composers/Frederic-Chopin.png"
+const handel = "/images/composers/George-Frideric-Handel.png"
+const rossini = "/images/composers/Gioachino-Rossini.png"
+const verdi = "/images/composers/Giuseppe-Verdi.png"
+const brahms = "/images/composers/Johannes-Brahms.png"
+const beethoven = "/images/composers/Ludwig-van-Beethoven.png"
+const wagner = "/images/composers/Richard-Wagner.png"
+const mozart = "/images/composers/Wolfgang-Amadeus-Mozart.png"
+const rachmaninov = "/images/composers/Sergei-Rachmaninov.png"
 
 const composerArray = [bach, vivaldi, mendelssohn, chopin, handel, rossini, verdi, brahms, beethoven, wagner]
 
@@ -38,6 +41,8 @@ startButton.style.display = 'none'
 resetButton.style.display = 'none'
 mainMenuButton.style.display = 'none'
 popComposer.style.display = 'none'
+gameScore.style.display = 'none'
+turnMessage.style.display = 'none'
 
 // composers button
 function showComposers() {
@@ -79,10 +84,12 @@ function startGame() {
     // paragraph hide
     paragraph.style.display = 'none'
     // Show score
-    document.body.insertBefore(gameScore, document.body.firstChild)
+    gameScore.style.display = 'flex'
+    //document.body.insertBefore(gameScore, document.body.firstChild)
     gameScore.innerText = "Score: " + score
     // Show move
-    document.body.insertBefore(turnMessage, document.body.firstChild)
+    turnMessage.style.display = 'flex'
+    //document.body.insertBefore(turnMessage, document.body.firstChild)
     turnMessage.innerText = "Match attempts: " + turn
     // hide cards
     // const images = document.querySelectorAll('img')    
@@ -91,6 +98,8 @@ function startGame() {
     // hide start button
     startButton.style.display = 'none'
     resetButton.style.display = 'flex'
+    score = 0
+    turn = 0
 
     music.play();
     music.loop =true;
@@ -106,6 +115,10 @@ function reset() {
     clearComposers()
     showComposers()
     resetButton.style.display = "none"
+    heading.style.display = 'flex'
+    paragraph.style.display = 'flex'
+    turnMessage.style.display = 'none'
+    gameScore.style.display = 'none'
 }
 
 function mainMenu() {
@@ -116,8 +129,9 @@ function mainMenu() {
     heading.style.display = 'flex'
     paragraph.style.display = 'flex'
     turnMessage.style.display = 'none'   
-    gameScore.style.direction = 'none'
-    heading.innerHTML = 'Memoery Games'
+    gameScore.style.display = 'none'
+    heading.innerHTML = 'Memory Games'
+    resetButton.style.display = 'none'
     paragraph.innerHTML = "Find the cards with matching contents to win. Choose the theme of the game below"
 }
 
@@ -248,6 +262,7 @@ if (turn >= 10 ) {
         
 }
 turn += 1
+gameScore.style.display = 'none'
 }
 
 }

@@ -3,7 +3,7 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-image: url(/project-1/images/composers/match-photo.png);
+    background-image: url(/images/composers/match-photo.png);
 }
 
 img {

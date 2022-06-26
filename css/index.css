@@ -63,13 +63,17 @@ p {
 }
 
 button {
-    font-size: 1.4em;
+    font-size: 1.7em;
     border: 2px solid black;
     margin: 15px;
     border-radius: 10%;
     font-weight: bold;
     font-family: copperplate;
 }
+
 button:hover {
+    background-color: black;
+    color: whitesmoke;
     transform: scale(1.15);
+    border: 2px solid whitesmoke;
 }

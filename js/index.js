@@ -8,14 +8,9 @@ const rhythmButton = document.getElementById('rhythm-button')
 const startButton = document.getElementById('start-button')
 const resetButton = document.getElementById('reset-button')
 const mainMenuButton = document.getElementById('main-menu-button')
-//const popComposer = document.getElementById('pop-composer')
 const music = new Audio("/music/Gymnopedie-1.mp3")
 const cardContainer = document.getElementById("card-container")
-//const gameScore = document.createElement('h2')
 const gameScore = document.getElementById('game-score')
-// gameScore.setAttribute("id", "game-score")
-//const turnMessage = document.createElement('h2')
-// turnMessage.setAttribute("id", "turn-message")
 const turnMessage = document.getElementById('turn-message')
 
 let score = 0
@@ -25,7 +20,7 @@ let cardClass = null
 let cardBeats = null
 let matchTwo = null
 
-// Composer photos inside composerArray
+// Composer photos 
 const vivaldi = "/images/composers/Antonio-Vivaldi.png"
 const bach = "/images/composers/Johann-Sebastian-Bach.png"
 const mendelssohn = "/images/composers/Felix-Mendelssohn.png"
@@ -39,10 +34,10 @@ const wagner = "/images/composers/Richard-Wagner.png"
 const mozart = "/images/composers/Wolfgang-Amadeus-Mozart.png"
 const rachmaninov = "/images/composers/Sergei-Rachmaninov.png"
 
-const composerArray = [bach, vivaldi, mendelssohn, chopin, handel, rossini, verdi, brahms, beethoven, wagner]
+const composerArray = [bach, vivaldi, mozart, chopin, rachmaninov, rossini, verdi, brahms, beethoven, wagner]
 const doubleAComposerArray = [...composerArray, ...composerArray]
 
-// Rhythm Array Photos
+// Rhythm Photos
 const rhythmArray = [
     {
         "symbol" : "whole note",
@@ -95,11 +90,10 @@ const rhythmArray = [
         "beats" : 0.25
     }
 ]
-
 const chart = "/images/Rhythms/Chart.png"
 const rhythmBackGround = ""
 
-// Keyboard Array
+// Keys Photos
 const keysArray = [
     {
         "symbol" : "Key A",
@@ -173,7 +167,7 @@ const keysArray = [
     }
 ]
 
-// Treble Clef Spaces Array
+// Treble Clef Spaces Photos
 const trebleSpacesArray = [
     {
         "symbol" : "Space A",
@@ -277,7 +271,7 @@ const trebleSpacesArray = [
     // }
 ]
 
-// Treble Clef Lines Array
+// Treble Clef Lines Photos
 const trebleLinesArray = [
     // {
     //     "symbol" : "Space A",
@@ -390,15 +384,14 @@ startButton.addEventListener('click', startGame)
 resetButton.addEventListener('click', reset)
 mainMenuButton.addEventListener('click', mainMenu)
 rhythmButton.addEventListener('click', showRhythms)
-// popComposer.addEventListener('click', popComposerArray)
 
 startButton.style.display = 'none'
 resetButton.style.display = 'none'
 mainMenuButton.style.display = 'none'
-//popComposer.style.display = 'none'
 gameScore.style.display = 'none'
 turnMessage.style.display = 'none'
 
+// Start Game Button
 function startGame() {
     console.log("Hello World")
     // heading hide
@@ -414,7 +407,6 @@ function startGame() {
     //document.body.insertBefore(turnMessage, document.body.firstChild)
     turnMessage.innerText = "Match attempts: " + turn
     // hide cards
-    // const images = document.querySelectorAll('img')    
     const imagesClass = document.querySelectorAll('.image')
     imagesClass.forEach(image => {image.style.visibility = 'hidden'})
     // hide start button
@@ -422,13 +414,16 @@ function startGame() {
     resetButton.style.display = 'flex'
     score = 0
     turn = 0
-
+    cardBeats = null
+    cardValue = null
+    cardClass = null
     music.play();
     music.loop =true;
     music.playbackRate = 1;
     //music.pause();qqazszdgfbgtyj
 }
 
+// Reset Button
 function reset() {
     let nextGame = null
     if (cardContainer.dataset.game === "rhythm") {
@@ -437,33 +432,47 @@ function reset() {
     if (cardContainer.dataset.game === "keys") {
         nextGame = "keys"
     }
+    if (cardContainer.dataset.game === "spaces") {
+        nextGame = "spaces"
+    }
+    if (cardContainer.dataset.game === "lines") {
+        nextGame = "lines"
+    }
+    if (cardContainer.dataset.game === "composers") {
+        nextGame = "composers"
+    }
     clearComposers()
     turn = 0
     score = 0
     gameScore.innerText = "Score: " + score
     turnMessage.innerText = "Match attempts: " + turn
-    // check heading contents and create a conditional for rhythm vs composer function
     resetButton.style.display = "none"
     heading.style.display = 'flex'
     paragraph.style.display = 'flex'
     turnMessage.style.display = 'none'
     gameScore.style.display = 'none'
     if (nextGame === "rhythm") {
-        createRhythms()
+        showRhythms()
     } else if (nextGame === "keys") {
-        createKeys()
-    } else {
+        showKeys()
+    } else if (nextGame === "composers") {
         showComposers()
+    } else if (nextGame === "spaces") {
+        showTrebleSpaceNotes()
+    } else {
+        showTrebleLineNotes()
     }
 }
 
+// Main Menu Button
 function mainMenu() {
     clearComposers()
     cardContainer.dataset.game = ''
     composerButton.style.display = "flex"
     rhythmButton.style.display = "flex"
     keyNamesButton.style.display = 'flex'
-    noteNamesButton.style.display = 'flex'
+    trebleSpacesButton.style.display = 'flex'
+    trebleLinesButton.style.display = 'flex'
     mainMenuButton.style.display = "none"
     startButton.style.display = 'none'
     heading.style.display = 'flex'
@@ -477,6 +486,13 @@ function mainMenu() {
     turn = 0
 }
 
+// Clear cards function, actually clears all cards not just composers
+function clearComposers() {
+    while (cardContainer.children.length > 0) {
+         cardContainer.firstChild.remove()
+    }
+}
+
 /// Composer Page ///
 function createComposers() {
     const shuffleArray = doubleAComposerArray.sort((a, b) => 0.5 - Math.random())
@@ -487,7 +503,6 @@ function createComposers() {
         composerDiv.style.border = "3px black solid"
         composerDiv.style.borderRadius = "5%"
         composerDiv.classList.add(`${shuffleArray[i]}`)
-
         const image = document.createElement('img')
         image.setAttribute('class', 'image')
         image.src = shuffleArray[i]
@@ -504,41 +519,28 @@ function showComposers() {
     cardContainer.style.justifyContent = "center"
     cardContainer.style.alignItems = "center"
     rhythmButton.style.display = "none"
+    cardContainer.dataset.game = "composers"
     // change heading inner contents to famous composers
     heading.innerText = "Famous Composers"
     // change paragraph to game description
     paragraph.innerHTML = `Click card and reveal a famous composer. Match an image and receive a point. <br> Match as many composers as possible in ten tries. Less than five loses, five to nine is pretty good, ten matches is awesome.`
     startButton.style.display = 'flex'
-    // popComposer.style.display = 'flex'
-    composerButton.style.display = "none"
-    rhythmButton.style.display = "none"
+    composerButton.style.display = 'none'
+    rhythmButton.style.display = 'none'
     keyNamesButton.style.display = 'none'
-    noteNamesButton.style.display = 'none'
-    mainMenuButton.style.display = "flex"
+    trebleSpacesButton.style.display = 'none'
+    trebleLinesButton.style.display = 'none'
+    mainMenuButton.style.display = 'flex'
 }
-
-function clearComposers() {
-    while (cardContainer.children.length > 0) {
-         cardContainer.firstChild.remove()
-    }
-}
-// function popComposerArray() {
-//     clearComposers()
-//     if (composerArray.length > 10) {
-//         composerArray.push(wagner, mozart, rachmaninov)
-//         showComposers()
-//         console.log(composerArray)
-//     } else { 
-//         return
-//     }
-// }
 
 function checkCards(event) {
     //function check if cards are matching
-    // First card clicked: check if variable is empty, flip card to show contents,  store card type, 
+    // First card clicked: check if variable is empty, flip card to show contents, store card type, 
+    //end game after 10 turns
     if (turn > 10) {
         return
     }
+    // On card Match
     if (event.target.className === cardClass) {
         event.target.firstChild.style.visibility = "visible"
         console.log("It's a match")
@@ -547,34 +549,28 @@ function checkCards(event) {
         score += 1
         turn += 1
         gameScore.innerText = "Score: " + score
+        gameScore.style.backgroundColor = "rgb(0, 255, 255)"
+        gameScore.style.color = "black"
+        function restGameScore() {
+            gameScore.style.backgroundColor = "black"
+            gameScore.style.color = "white"
+        }
+        setTimeout(restGameScore, 1000)
         turnMessage.innerText = "Match attempts: " + turn
-        console.log("bla bla")
         // Second Card clicked: if cards match: add one point to score. Turn plus one. Remove div from array. 
-        //const match = document.getElementsByClassName(`${event.target.className}`)
         const match = document.getElementsByClassName(`${event.target.className}`)
-       // const MatchTwo = document.getElementsByClassName(cardClass)
         match[0].firstChild.classList.remove('image')
         match[1].firstChild.classList.remove('image')
-        //console.log(MatchOne[0])
-        //console.log(MatchTwo[0])
-        //event.target.removeEventListener('click', checkCards)
         cardClass = null 
-        //event.target.firstChild.src = matchPhoto
-        //event.target.firstChild.()
-        // while (match.length > 0) {
-        //     match[0].remove()
-        //     //match[0].removeChild
-        // }
     } else if ((cardClass != null) && (event.target.className != cardClass)) {
         ///// && (event.target.firstChild.src != cardValue) ////
         // hide cards
         const noMatchOne = document.getElementsByClassName(`${event.target.className}`)
         const noMatchTwo = document.getElementsByClassName(cardClass)
-
         event.target.firstChild.style.visibility = "visible"
+        // update turn message
         turn += 1
         turnMessage.innerText = "Match attempts: " + turn
-        // update turn message
         // add event listener once
         console.log("no match")
         //console.log(cardValue)
@@ -590,29 +586,19 @@ function checkCards(event) {
         cardClass = null
 
     }  else {
-        console.log("Null value:")
-        //console.log(cardValue)
-    
-    console.log("I clicked on this ")
-    //console.log(event.target.firstChild.src)
-    console.log(event.target.firstChild)
-
-    event.target.firstChild.style.visibility = "visible"
-
-    // console.log("cardValue Previous: ")
-    // console.log(cardValue)
-    // cardValue = event.target.firstChild.src
-    //cardValue = event.target.firstChild.src
-    cardClass = event.target.className
-    cardValue = event.target
-    console.log(event.target)
-    console.log("card Class", cardClass)
-    //console.log("CardValue " + cardValue)
-   // console.log(cardValue)
-    console.log("class name: ")
-    console.log(event.target.className)  
+        // console.log("Null value: ", cardValue)
+        // console.log("I clicked on this ", event.target)
+        // console.log(event.target.firstChild)
+        event.target.firstChild.style.visibility = "visible"
+        cardClass = event.target.className
+        cardValue = event.target
+        console.log("card Class", cardClass)
+        //console.log("CardValue " + cardValue)
+        // console.log(cardValue)
+        console.log("class name: ")
+        console.log(event.target.className)  
     }
-    console.log(turn)
+    // End game after 10 turns
     if (turn >= 10 ) {
       if (score === 10) {
         turnMessage.innerHTML = "GAME OVER <br> You Bussin!"
@@ -639,11 +625,11 @@ function showRhythms() {
     // change paragraph to game description
     paragraph.innerHTML = `Click card and reveal a card. Match a rhythm note and rest value and receive a point. <br> Match as many rhythms as possible in ten tries. Less than five loses, five to nine is pretty good, ten matches is awesome.`
     startButton.style.display = 'flex'
-    // popComposer.style.display = 'flex'
     composerButton.style.display = "none"
     rhythmButton.style.display = "none"
     keyNamesButton.style.display = 'none'
-    noteNamesButton.style.display = 'none'
+    trebleLinesButton.style.display = 'none'
+    trebleSpacesButton.style.display = 'none'
     mainMenuButton.style.display = "flex"
 }
 
@@ -656,7 +642,6 @@ function createRhythms() {
          rhythmDiv.style.border = "3px black solid"
          rhythmDiv.style.borderRadius = "5%"
          rhythmDiv.addEventListener('click', checkRhythmCards)
-
          const image = document.createElement('img')
          image.setAttribute("data-beats", shuffleArray[i].beats)
          image.setAttribute('class', 'image')
@@ -677,61 +662,48 @@ function checkRhythmCards(event) {
         return
     }
     if ((cardValue != null) && (event.target.firstChild.dataset.id !=  cardValue)) {
+        // If Cards Match
         if (event.target.firstChild.dataset.beats === cardBeats) {
             event.target.firstChild.style.visibility = "visible"
             console.log("It's a match")
             score += 1
             turn += 1
             gameScore.innerText = "Score: " + score
+            gameScore.style.backgroundColor = "darkBlue"
             turnMessage.innerText = "Match attempts: " + turn
+            function resetGameScore() {
+                gameScore.style.backgroundColor = "black"
+                gameScore.style.color = "white"
+            }
+            setTimeout(resetGameScore, 1000)
             event.target.firstChild.classList.remove('image')
             matchTwo.firstChild.classList.remove('image')
             cardBeats = null 
             cardValue = null
             matchTwo = null
     } else if ((cardBeats != null) && (event.target.firstChild.dataset.beats != cardBeats)) {
+        // Cards don't Match
         event.target.firstChild.style.visibility = "visible"
         turn += 1
         turnMessage.innerText = "Match attempts: " + turn
-        console.log("no match")
-        //console.log(cardValue)
         const imagesCards = document.querySelectorAll('.image')
-
         function hideCards() {
             imagesCards.forEach(image => {image.style.visibility = "hidden"})
         }
-        console.log("cardbeats", cardBeats)
-        console.log("card clicked", event.target.firstChild.dataset.beats)
-
         setTimeout(hideCards, 2000)
         cardBeats = null
         cardValue = null
         matchTwo = null
     }  
 }   else {
-        console.log("Null value:")
-        console.log(cardValue)
-    
-    console.log("I clicked on this ")
-    //console.log(event.target.firstChild.src)
-    console.log(event.target)
-
-    event.target.firstChild.style.visibility = "visible"
-
-    cardBeats = event.target.firstChild.dataset.beats
-    cardValue = event.target.firstChild.dataset.id
-    matchTwo = event.target
-
-    console.log("cardValue", cardValue)
-    //cardValue = event.target
-    //console.log(event.target)
-    console.log("card stored", cardBeats)
-    //console.log("CardValue " + cardValue)
-   // console.log(cardValue)
-    console.log("card clicked: ")
-    console.log(event.target)  
+        console.log("Null value: ", cardValue)
+        console.log("I clicked on this ", event.target)
+        event.target.firstChild.style.visibility = "visible"
+        cardBeats = event.target.firstChild.dataset.beats
+        cardValue = event.target.firstChild.dataset.id
+        matchTwo = event.target
     }
-    console.log('turn', turn)
+        console.log('turn', turn)
     if (turn >= 5 ) {
       if (score === 5) {
         turnMessage.innerHTML = "GAME OVER <br> You Bussin!"
@@ -757,14 +729,11 @@ function createKeys() {
             keysDiv.style.border = "3px black solid"
             keysDiv.style.borderRadius = "5%"
             keysDiv.addEventListener('click', checkKeys)
-   
             const image = document.createElement('img')
             image.setAttribute("data-pitch", shuffleArray[i].pitch)
             image.setAttribute('class', 'image')
             image.setAttribute("data-id", i)
             image.src = shuffleArray[i].source
-            //image.style.height = "200px"
-            //image.style.width = "200px"
             keysDiv.appendChild(image)
             cardContainer.appendChild(keysDiv)
             startButton.style.display = 'flex'
@@ -781,13 +750,13 @@ function showKeys() {
     // change heading inner contents to famous composers
     heading.innerText = "Matching Piano Keys"
     // change paragraph to game description
-    paragraph.innerHTML = `Click card and reveal a card. Match earch cooresponding key and receive a point. <br> Match as many keys as possible in ten tries. Less than five loses, five to nine is pretty good, ten matches is awesome.`
+    paragraph.innerHTML = `Click card and reveal a card. Match earch cooresponding key and receive a point. <br> Match as many keys as possible in seven tries. Less than four loses, four to six is pretty good, seven matches is awesome.`
     startButton.style.display = 'flex'
-    // popComposer.style.display = 'flex'
     composerButton.style.display = "none"
     rhythmButton.style.display = "none"
     keyNamesButton.style.display = "none"
-    noteNamesButton.style.display = "none"
+    trebleLinesButton.style.display = "none"
+    trebleSpacesButton.style.display = "none"
     mainMenuButton.style.display = "flex"
 }
 
@@ -798,6 +767,7 @@ function checkKeys(event) {
         return
     }
     if ((cardValue != null) && (event.target.firstChild.dataset.id !=  cardValue)) {
+        // Cards Match
         if (event.target.firstChild.dataset.pitch === cardBeats) {
             event.target.firstChild.style.visibility = "visible"
             console.log("It's a match")
@@ -805,6 +775,11 @@ function checkKeys(event) {
             turn += 1
             gameScore.innerText = "Score: " + score
             turnMessage.innerText = "Match attempts: " + turn
+            gameScore.style.backgroundColor = "darkBlue"
+            function resetGameScore() {
+                gameScore.style.backgroundColor = "black"
+            }
+            setTimeout(resetGameScore, 1000)
             event.target.firstChild.classList.remove('image')
             matchTwo.firstChild.classList.remove('image')
             cardBeats = null 
@@ -815,12 +790,10 @@ function checkKeys(event) {
             turn += 1
             turnMessage.innerText = "Match attempts: " + turn
             const imagesCards = document.querySelectorAll('.image')
-
             function hideCards() {
             imagesCards.forEach(image => {image.style.visibility = "hidden"})
             }
             console.log("card clicked", event.target.firstChild.dataset.pitch)
-
             setTimeout(hideCards, 2000)
             cardBeats = null
             cardValue = null
@@ -845,7 +818,7 @@ function checkKeys(event) {
 }
 }
 
-//// Treble Space Page /////
+//// Treble Space Page ///////////////////////////////
 function createTrebleSpaceNotes() {
     const shuffleArray = trebleSpacesArray.sort((a, b) => 0.5 - Math.random())
         for(let i = 0; i < shuffleArray.length; i++) {
@@ -855,14 +828,11 @@ function createTrebleSpaceNotes() {
             keysDiv.style.border = "3px black solid"
             keysDiv.style.borderRadius = "5%"
             keysDiv.addEventListener('click', checkKeys)
-   
             const image = document.createElement('img')
             image.setAttribute("data-pitch", shuffleArray[i].pitch)
             image.setAttribute('class', 'image')
             image.setAttribute("data-id", i)
             image.src = shuffleArray[i].source
-            //image.style.height = "200px"
-            //image.style.width = "200px"
             keysDiv.appendChild(image)
             cardContainer.appendChild(keysDiv)
             startButton.style.display = 'flex'
@@ -875,13 +845,12 @@ function showTrebleSpaceNotes() {
     cardContainer.style.flexWrap = "wrap"
     cardContainer.style.justifyContent = "center"
     cardContainer.style.alignItems = "center"
-    cardContainer.dataset.game = "keys"
+    cardContainer.dataset.game = "spaces"
     // change heading inner contents to famous composers
-    heading.innerText = "Matching Piano Keys"
+    heading.innerText = "Matching Treble Cleff Spaces"
     // change paragraph to game description
-    paragraph.innerHTML = `Click card and reveal a card. Match earch cooresponding key and receive a point. <br> Match as many keys as possible in ten tries. Less than five loses, five to nine is pretty good, ten matches is awesome.`
+    paragraph.innerHTML = `Click card and reveal a card. Match earch cooresponding key and receive a point. <br> Match as many keys as possible in four tries. Less than three loses, four matches is awesome.`
     startButton.style.display = 'flex'
-    // popComposer.style.display = 'flex'
     composerButton.style.display = "none"
     rhythmButton.style.display = "none"
     keyNamesButton.style.display = "none"
@@ -956,14 +925,11 @@ function createTrebleLineNotes() {
             keysDiv.style.border = "3px black solid"
             keysDiv.style.borderRadius = "5%"
             keysDiv.addEventListener('click', checkKeys)
-   
             const image = document.createElement('img')
             image.setAttribute("data-pitch", shuffleArray[i].pitch)
             image.setAttribute('class', 'image')
             image.setAttribute("data-id", i)
             image.src = shuffleArray[i].source
-            //image.style.height = "200px"
-            //image.style.width = "200px"
             keysDiv.appendChild(image)
             cardContainer.appendChild(keysDiv)
             startButton.style.display = 'flex'
@@ -976,13 +942,12 @@ function showTrebleLineNotes() {
     cardContainer.style.flexWrap = "wrap"
     cardContainer.style.justifyContent = "center"
     cardContainer.style.alignItems = "center"
-    cardContainer.dataset.game = "keys"
+    cardContainer.dataset.game = "lines"
     // change heading inner contents to famous composers
-    heading.innerText = "Matching Piano Keys"
+    heading.innerText = "Matching Treble Clef Lines"
     // change paragraph to game description
-    paragraph.innerHTML = `Click card and reveal a card. Match earch cooresponding key and receive a point. <br> Match as many keys as possible in ten tries. Less than five loses, five to nine is pretty good, ten matches is awesome.`
+    paragraph.innerHTML = `Click card and reveal a card. Match earch cooresponding key and receive a point. <br> Match as many notes as possible in seven tries. Less than five loses, four to seven is pretty good, seven matches is awesome.`
     startButton.style.display = 'flex'
-    // popComposer.style.display = 'flex'
     composerButton.style.display = "none"
     rhythmButton.style.display = "none"
     keyNamesButton.style.display = "none"

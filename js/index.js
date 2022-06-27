@@ -21,8 +21,8 @@ let cardBeats = null
 let matchTwo = null
 
 // Composer photos 
-const vivaldi = "/images/composers/Antonio-Vivaldi.png"
-const bach = "/images/composers/Johann-Sebastian-Bach.png"
+const vivaldi = "../images/composers/Antonio-Vivaldi.png"
+const bach = "./images/composers/Johann-Sebastian-Bach.png"
 const mendelssohn = "/images/composers/Felix-Mendelssohn.png"
 const chopin = "/images/composers/Frederic-Chopin.png"
 const handel = "/images/composers/George-Frideric-Handel.png"
@@ -174,120 +174,50 @@ const trebleSpacesArray = [
         "source" : "/images/Note-Names/A-space.png",
         "pitch" : "A"
     },
-    // {
-    //     "symbol" : "Line B",
-    //     "source" : "/images/Note-Names/B-line.png",
-    //     "pitch" : "B"
-    // },
     {
         "symbol" : "Space C",
         "source" : "/images/Note-Names/C-space.png",
         "pitch" : "C-space"
     },
-    // {
-    //     "symbol" : "Line C",
-    //     "source" : "/images/Note-Names/Middle-C.png",
-    //     "pitch" : "C-line"
-    // },
-    // {
-    //     "symbol" : "Line D",
-    //     "source" : "/images/Note-Names/D-line.png",
-    //     "pitch" : "D"
-    // },
     {
         "symbol" : "Space E",
         "source" : "/images/Note-Names/E-space.png",
         "pitch" : "E-space"
     },
-    // {
-    //     "symbol" : "Line E",
-    //     "source" : "/images/Note-Names/E-line.png",
-    //     "pitch" : "E-line"
-    // },
-    // {
-    //     "symbol" : "Line F",
-    //     "source" : "/images/Note-Names/F-line.png",
-    //     "pitch" : "F-line"
-    // },
     {
         "symbol" : "Space F",
         "source" : "/images/Note-Names/F-space.png",
         "pitch" : "F-space"
     },
-    // {
-    //     "symbol" : "Line G",
-    //     "source" : "/images/Note-Names/G-line.png",
-    //     "pitch" : "G"
-    // },
     {
         "symbol" : "Space A, Letter",
         "source" : "/images/Note-Names/A-spaceA.png",
         "pitch" : "A"
     },
-    // {
-    //     "symbol" : "Line B, Letter",
-    //     "source" : "/images/Note-Names/B-lineB.png",
-    //     "pitch" : "B"
-    // },
     {
         "symbol" : "Space C, Letter",
         "source" : "/images/Note-Names/C-spaceC.png",
         "pitch" : "C-space"
     },
-    // {
-    //     "symbol" : "Line C, Letter",
-    //     "source" : "/images/Note-Names/Middle-C-C.png",
-    //     "pitch" : "C-line"
-    // },
-    // {
-    //     "symbol" : "Line D, Letter",
-    //     "source" : "/images/Note-Names/D-lineD.png",
-    //     "pitch" : "D"
-    // },
     {
         "symbol" : "Space E, Letter",
         "source" : "/images/Note-Names/E-spaceE.png",
         "pitch" : "E-space"
     },
-    // {
-    //     "symbol" : "Line E, Letter",
-    //     "source" : "/images/Note-Names/E-lineE.png",
-    //     "pitch" : "E-line"
-    // },
-    // {
-    //     "symbol" : "Line F, Letter",
-    //     "source" : "/images/Note-Names/F-lineF.png",
-    //     "pitch" : "F-line"
-    // },
     {
         "symbol" : "Space F, Letter",
         "source" : "/images/Note-Names/F-spaceF.png",
         "pitch" : "F-space"
     },
-    // {
-    //     "symbol" : "Line G, Letter",
-    //     "source" : "/images/Note-Names/G-lineG.png",
-    //     "pitch" : "G"
-    // }
 ]
 
 // Treble Clef Lines Photos
 const trebleLinesArray = [
-    // {
-    //     "symbol" : "Space A",
-    //     "source" : "/images/Note-Names/A-space.png",
-    //     "pitch" : "A"
-    // },
     {
         "symbol" : "Line B",
         "source" : "/images/Note-Names/B-line.png",
         "pitch" : "B"
     },
-    // {
-    //     "symbol" : "Space C",
-    //     "source" : "/images/Note-Names/C-space.png",
-    //     "pitch" : "C-space"
-    // },
      {
         "symbol" : "Line C",
         "source" : "/images/Note-Names/Middle-C.png",
@@ -313,31 +243,16 @@ const trebleLinesArray = [
         "source" : "/images/Note-Names/F-line.png",
         "pitch" : "F-line"
     },
-    // {
-    //     "symbol" : "Space F",
-    //     "source" : "/images/Note-Names/F-space.png",
-    //     "pitch" : "F-space"
-    // },
      {
         "symbol" : "Line G",
         "source" : "/images/Note-Names/G-line.png",
         "pitch" : "G"
     },
-    // {
-    //     "symbol" : "Space A, Letter",
-    //     "source" : "/images/Note-Names/A-spaceA.png",
-    //     "pitch" : "A"
-    // },
      {
         "symbol" : "Line B, Letter",
         "source" : "/images/Note-Names/B-lineB.png",
         "pitch" : "B"
     },
-    // {
-    //     "symbol" : "Space C, Letter",
-    //     "source" : "/images/Note-Names/C-spaceC.png",
-    //     "pitch" : "C-space"
-    // },
     {
         "symbol" : "Line C, Letter",
         "source" : "/images/Note-Names/Middle-C-C.png",
@@ -348,11 +263,6 @@ const trebleLinesArray = [
         "source" : "/images/Note-Names/D-lineD.png",
         "pitch" : "D"
     },
-    // {
-    //     "symbol" : "Space E, Letter",
-    //     "source" : "/images/Note-Names/E-spaceE.png",
-    //     "pitch" : "E-space"
-    // },
     {
         "symbol" : "Line E, Letter",
         "source" : "/images/Note-Names/E-lineE.png",
@@ -363,11 +273,6 @@ const trebleLinesArray = [
         "source" : "/images/Note-Names/F-lineF.png",
         "pitch" : "F-line"
     },
-    // {
-    //     "symbol" : "Space F, Letter",
-    //     "source" : "/images/Note-Names/F-spaceF.png",
-    //     "pitch" : "F-space"
-    // },
     {
         "symbol" : "Line G, Letter",
         "source" : "/images/Note-Names/G-lineG.png",

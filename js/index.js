@@ -21,18 +21,18 @@ let cardBeats = null
 let matchTwo = null
 
 // Composer photos 
-const vivaldi = "../images/composers/Antonio-Vivaldi.png"
+const vivaldi = "./images/composers/Antonio-Vivaldi.png"
 const bach = "./images/composers/Johann-Sebastian-Bach.png"
-const mendelssohn = "/images/composers/Felix-Mendelssohn.png"
-const chopin = "/images/composers/Frederic-Chopin.png"
-const handel = "/images/composers/George-Frideric-Handel.png"
-const rossini = "/images/composers/Gioachino-Rossini.png"
-const verdi = "/images/composers/Giuseppe-Verdi.png"
-const brahms = "/images/composers/Johannes-Brahms.png"
-const beethoven = "/images/composers/Ludwig-van-Beethoven.png"
-const wagner = "/images/composers/Richard-Wagner.png"
-const mozart = "/images/composers/Wolfgang-Amadeus-Mozart.png"
-const rachmaninov = "/images/composers/Sergei-Rachmaninov.png"
+const mendelssohn = "./images/composers/Felix-Mendelssohn.png"
+const chopin = "./images/composers/Frederic-Chopin.png"
+const handel = "./images/composers/George-Frideric-Handel.png"
+const rossini = "./images/composers/Gioachino-Rossini.png"
+const verdi = "./images/composers/Giuseppe-Verdi.png"
+const brahms = "./images/composers/Johannes-Brahms.png"
+const beethoven = "./images/composers/Ludwig-van-Beethoven.png"
+const wagner = "./images/composers/Richard-Wagner.png"
+const mozart = "./images/composers/Wolfgang-Amadeus-Mozart.png"
+const rachmaninov = "./images/composers/Sergei-Rachmaninov.png"
 
 const composerArray = [bach, vivaldi, mozart, chopin, rachmaninov, rossini, verdi, brahms, beethoven, wagner]
 const doubleAComposerArray = [...composerArray, ...composerArray]
@@ -41,128 +41,128 @@ const doubleAComposerArray = [...composerArray, ...composerArray]
 const rhythmArray = [
     {
         "symbol" : "whole note",
-        "source" : "/images/Rhythms/whole-note.png",
+        "source" : "./images/Rhythms/whole-note.png",
         "beats" : 4,
     },
     {
         "symbol" : "whole rest",
-        "source" : "/images/Rhythms/whole-rest.png",
+        "source" : "./images/Rhythms/whole-rest.png",
         "beats" : 4
     },
     {
         "symbol" : "half note",
-        "source" : "/images/Rhythms/half-note.png",
+        "source" : "./images/Rhythms/half-note.png",
         "beats" : 2
     },
     {
         "symbol" : "half rest",
-        "source" : "/images/Rhythms/half-rest.png",
+        "source" : "./images/Rhythms/half-rest.png",
         "beats" : 2
     },
     {
         "symbol" : "quarter note",
-        "source" : "/images/Rhythms/quarter-note.png",
+        "source" : "./images/Rhythms/quarter-note.png",
         "beats" : 1
     },
     {
         "symbol" : "quarter rest",
-        "source" : "/images/Rhythms/quarter-rest.png",
+        "source" : "./images/Rhythms/quarter-rest.png",
         "beats" : 1
     },
     {
         "symbol" : "eight note",
-        "source" : "/images/Rhythms/eighth-note.png",
+        "source" : "./images/Rhythms/eighth-note.png",
         "beats" : 0.5
     },
     {
         "symbol" : "eighth rest",
-        "source" : "/images/Rhythms/eighth-rest.png",
+        "source" : "./images/Rhythms/eighth-rest.png",
         "beats" : 0.5
     },
     {
        "symbol" : "sixteenth note",
-        "source" : "/images/Rhythms/sixteenth-note.png",
+        "source" : "./images/Rhythms/sixteenth-note.png",
         "beats" : 0.25
     },
     {
         "symbol" : "sixteenth rest",
-        "source" : "/images/Rhythms/sixteenth-rest.png",
+        "source" : "./images/Rhythms/sixteenth-rest.png",
         "beats" : 0.25
     }
 ]
-const chart = "/images/Rhythms/Chart.png"
+const chart = "./images/Rhythms/Chart.png"
 const rhythmBackGround = ""
 
 // Keys Photos
 const keysArray = [
     {
         "symbol" : "Key A",
-        "source" : "/images/keys/AQ.png",
+        "source" : "./images/keys/AQ.png",
         "pitch" : "A"
     },
     {
         "symbol" : "Key B",
-        "source" : "/images/keys/BQ.png",
+        "source" : "./images/keys/BQ.png",
         "pitch" : "B"
     },
     {
         "symbol" : "Key C",
-        "source" : "/images/keys/CQ.png",
+        "source" : "./images/keys/CQ.png",
         "pitch" : "C"
     },
     {
         "symbol" : "Key D",
-        "source" : "/images/keys/DQ.png",
+        "source" : "./images/keys/DQ.png",
         "pitch" : "D"
     },
     {
         "symbol" : "Key E",
-        "source" : "/images/keys/EQ.png",
+        "source" : "./images/keys/EQ.png",
         "pitch" : "E"
     },
     {
         "symbol" : "Key F",
-        "source" : "/images/keys/FQ.png",
+        "source" : "./images/keys/FQ.png",
         "pitch" : "F"
     },
     {
         "symbol" : "Key G",
-        "source" : "/images/keys/GQ.png",
+        "source" : "./images/keys/GQ.png",
         "pitch" : "G"
     },
     {
         "symbol" : "Letter A",
-        "source" : "/images/keys/A.png",
+        "source" : "./images/keys/A.png",
         "pitch" : "A"
     },
     {
         "symbol" : "Letter B",
-        "source" : "/images/keys/B.png",
+        "source" : "./images/keys/B.png",
         "pitch" : "B"
     },
     {
         "symbol" : "Letter C",
-        "source" : "/images/keys/C.png",
+        "source" : "./images/keys/C.png",
         "pitch" : "C"
     },
     {
         "symbol" : "Letter D",
-        "source" : "/images/keys/D.png",
+        "source" : "./images/keys/D.png",
         "pitch" : "D"
     },
     {
         "symbol" : "Letter E",
-        "source" : "/images/keys/E.png",
+        "source" : "./images/keys/E.png",
         "pitch" : "E"
     },
     {
         "symbol" : "Letter F",
-        "source" : "/images/keys/F.png",
+        "source" : "./images/keys/F.png",
         "pitch" : "F"
     },
     {
         "symbol" : "Letter G",
-        "source" : "/images/keys/G.png",
+        "source" : "./images/keys/G.png",
         "pitch" : "G"
     }
 ]
@@ -171,42 +171,42 @@ const keysArray = [
 const trebleSpacesArray = [
     {
         "symbol" : "Space A",
-        "source" : "/images/Note-Names/A-space.png",
+        "source" : "./images/Note-Names/A-space.png",
         "pitch" : "A"
     },
     {
         "symbol" : "Space C",
-        "source" : "/images/Note-Names/C-space.png",
+        "source" : "./images/Note-Names/C-space.png",
         "pitch" : "C-space"
     },
     {
         "symbol" : "Space E",
-        "source" : "/images/Note-Names/E-space.png",
+        "source" : "./images/Note-Names/E-space.png",
         "pitch" : "E-space"
     },
     {
         "symbol" : "Space F",
-        "source" : "/images/Note-Names/F-space.png",
+        "source" : "./images/Note-Names/F-space.png",
         "pitch" : "F-space"
     },
     {
         "symbol" : "Space A, Letter",
-        "source" : "/images/Note-Names/A-spaceA.png",
+        "source" : "./images/Note-Names/A-spaceA.png",
         "pitch" : "A"
     },
     {
         "symbol" : "Space C, Letter",
-        "source" : "/images/Note-Names/C-spaceC.png",
+        "source" : "./images/Note-Names/C-spaceC.png",
         "pitch" : "C-space"
     },
     {
         "symbol" : "Space E, Letter",
-        "source" : "/images/Note-Names/E-spaceE.png",
+        "source" : "./images/Note-Names/E-spaceE.png",
         "pitch" : "E-space"
     },
     {
         "symbol" : "Space F, Letter",
-        "source" : "/images/Note-Names/F-spaceF.png",
+        "source" : "./images/Note-Names/F-spaceF.png",
         "pitch" : "F-space"
     },
 ]
@@ -215,67 +215,67 @@ const trebleSpacesArray = [
 const trebleLinesArray = [
     {
         "symbol" : "Line B",
-        "source" : "/images/Note-Names/B-line.png",
+        "source" : "./images/Note-Names/B-line.png",
         "pitch" : "B"
     },
      {
         "symbol" : "Line C",
-        "source" : "/images/Note-Names/Middle-C.png",
+        "source" : "./images/Note-Names/Middle-C.png",
         "pitch" : "C-line"
     },
     {
         "symbol" : "Line D",
-        "source" : "/images/Note-Names/D-line.png",
+        "source" : "./images/Note-Names/D-line.png",
         "pitch" : "D"
     },
     {
         "symbol" : "Space E",
-        "source" : "/images/Note-Names/E-space.png",
+        "source" : "./images/Note-Names/E-space.png",
         "pitch" : "E-space"
     },
     {
         "symbol" : "Line E",
-        "source" : "/images/Note-Names/E-line.png",
+        "source" : "./images/Note-Names/E-line.png",
         "pitch" : "E-line"
     },
     {
         "symbol" : "Line F",
-        "source" : "/images/Note-Names/F-line.png",
+        "source" : "./images/Note-Names/F-line.png",
         "pitch" : "F-line"
     },
      {
         "symbol" : "Line G",
-        "source" : "/images/Note-Names/G-line.png",
+        "source" : "./images/Note-Names/G-line.png",
         "pitch" : "G"
     },
      {
         "symbol" : "Line B, Letter",
-        "source" : "/images/Note-Names/B-lineB.png",
+        "source" : "./images/Note-Names/B-lineB.png",
         "pitch" : "B"
     },
     {
         "symbol" : "Line C, Letter",
-        "source" : "/images/Note-Names/Middle-C-C.png",
+        "source" : "./images/Note-Names/Middle-C-C.png",
         "pitch" : "C-line"
     },
     {
         "symbol" : "Line D, Letter",
-        "source" : "/images/Note-Names/D-lineD.png",
+        "source" : "./images/Note-Names/D-lineD.png",
         "pitch" : "D"
     },
     {
         "symbol" : "Line E, Letter",
-        "source" : "/images/Note-Names/E-lineE.png",
+        "source" : "./images/Note-Names/E-lineE.png",
         "pitch" : "E-line"
     },
     {
         "symbol" : "Line F, Letter",
-        "source" : "/images/Note-Names/F-lineF.png",
+        "source" : "./images/Note-Names/F-lineF.png",
         "pitch" : "F-line"
     },
     {
         "symbol" : "Line G, Letter",
-        "source" : "/images/Note-Names/G-lineG.png",
+        "source" : "./images/Note-Names/G-lineG.png",
         "pitch" : "G"
     }
 ]

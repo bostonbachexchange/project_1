@@ -1,4 +1,4 @@
-![](images/Overview.png)
+# Music Themed Memory Games
 
 ## Deployed On GH pages
 https://bostonbachexchange.github.io/project_1/
@@ -7,6 +7,8 @@ Memory
 --Main Page
 a main page will display with the name of the game
 a description of the game underneath. Click on the cards to reveal their contents. Find the cards with matching contents to collect points.
+
+![](images/Overview.png)
 
 ![](images/mainPage.png)
 

@@ -1,5 +1,8 @@
 ![](images/Overview.png)
 
+## Deployed On GH pages
+https://bostonbachexchange.github.io/project_1/
+
 Memory
 --Main Page
 a main page will display with the name of the game
